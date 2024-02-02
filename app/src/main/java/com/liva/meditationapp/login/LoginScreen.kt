@@ -77,8 +77,8 @@ fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
             .fillMaxWidth()
             .height(38.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFFF4303),
-            disabledContainerColor = Color(0xFFF78058),
+            disabledContainerColor = Color(0xFF025EFF),
+            containerColor = Color(0xFF649AF8),
             contentColor = Color.White,
             disabledContentColor = Color.White
         ),
@@ -96,7 +96,7 @@ fun ForgotPassword(modifier: Modifier) {
         modifier = modifier.clickable { },
         fontSize = 12.sp,
         fontWeight = FontWeight.Bold,
-        color = Color(0xFFFB9600)
+        color = Color(0xFF649AF8)
     )
 }
 
@@ -106,13 +106,13 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
     TextField(
         value = password,
         onValueChange = { onTextFieldChanged(it) },
-        placeholder = { Text(text = "Contraseña") },
+        placeholder = { Text(text = "Contraseña")},
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         singleLine = true,
         maxLines = 1,
         colors = TextFieldDefaults.textFieldColors(
-            //textColor = Color(0xFF636262),
+            focusedTextColor = Color(0xFF636262),
             containerColor = Color(0xFFDEDDDD),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
@@ -132,7 +132,7 @@ fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
         singleLine = true,
         maxLines = 1,
         colors = TextFieldDefaults.textFieldColors(
-            //textColor = Color(0xFF636262),
+            focusedTextColor = Color(0xFF636262),
             containerColor = Color(0xFFDEDDDD),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
@@ -149,5 +149,5 @@ fun HeaderImage(modifier: Modifier) {
         ),
         contentDescription = "Logo"
     )
-
 }
+
