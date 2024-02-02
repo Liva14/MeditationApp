@@ -1,5 +1,6 @@
 package com.liva.meditationapp.login
 
+import android.content.Intent
 import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -29,11 +30,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.liva.meditationapp.MainActivity
 import com.liva.meditationapp.R
 import kotlinx.coroutines.launch
 
@@ -71,14 +74,19 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel) {
 
 @Composable
 fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
+    val context = LocalContext.current
     Button(
-        onClick = { onLoginSelected() },
+        onClick = {
+            onLoginSelected()
+            // Navigate to the main activity
+            context.startActivity(Intent(context, MainActivity::class.java))
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(38.dp),
         colors = ButtonDefaults.buttonColors(
-            disabledContainerColor = Color(0xFF025EFF),
-            containerColor = Color(0xFF649AF8),
+            disabledContainerColor = Color(0xFF649AF8),
+            containerColor = Color(0xFF025EFF),
             contentColor = Color.White,
             disabledContentColor = Color.White
         ),
