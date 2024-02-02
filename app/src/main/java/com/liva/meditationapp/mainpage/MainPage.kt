@@ -26,8 +26,6 @@ import com.liva.meditationapp.scaffold.MyTopAppBar
 @Preview
 @Composable
 fun MeditationApp() {
-    val selectedItem = remember { mutableStateOf(0) }
-
     Scaffold(
         topBar = {
             MyTopAppBar()

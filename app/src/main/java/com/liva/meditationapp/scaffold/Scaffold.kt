@@ -30,20 +30,11 @@ fun MyTopAppBar() {
     TopAppBar(
         title = { Text("MediAPP", color = Color.White) },
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xFF649AF8)),
-        navigationIcon = {
-            IconButton(onClick = { }) {
-                Icon(
-                    Icons.Filled.Menu,
-                    contentDescription = "Desc",
-                    tint = Color.White
-                )
-            }
-        },
         actions = {
             IconButton(onClick = {}) {
                 Icon(
-                    Icons.Default.Info,
-                    contentDescription = "About",
+                    Icons.Default.Settings,
+                    contentDescription = "Setings",
                     tint = Color.White
                 )
             }
@@ -75,12 +66,12 @@ fun MyBottomNavigation() {
             onClick = { index = 2 },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = "Settings",
+                    imageVector = Icons.Default.Info,
+                    contentDescription = "About",
                     tint = Color(0xFF0A157A),
                 )
             },
-            label = { Text("Settings", color = Color.White) }
+            label = { Text("About", color = Color.White) }
         )
     }
 }
