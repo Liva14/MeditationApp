@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,7 +23,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.liva.meditationapp.adhdmeditation.AdhdPreview
+import com.liva.meditationapp.adhdmeditation.AdhdPreview //Este import salta error y el resto no, no lo entiendo.
 import com.liva.meditationapp.anxietymeditation.AnxietyPreview
 import com.liva.meditationapp.focusingmeditation.FocusingPreview
 import com.liva.meditationapp.scaffold.MyBottomNavigation
@@ -47,9 +49,10 @@ fun MeditationApp() {
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
             Meditation(text = "Meditation")
-            MeditationText(text = "Meditation is a practice of mindfulness, or focusing the mind on a particular object, thought, or activity to train attention and awareness, and achieve a mentally clear and emotionally calm and stable state.\n\nIn this app you will receive tips for different types of meditations.")
+            MeditationText(text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop Aldus software like including versions of Lorem Ipsum publishing PageMaker")
             MeditationExercises(navController = navController)
         }
     }
@@ -144,7 +147,7 @@ fun NavigationGraph() {
             MeditationExercises(navController)
         }
         composable("sleeping_exercise") {
-            SleepingPreview(n)
+            SleepingPreview()
         }
         composable("anxiety_exercise") {
             AnxietyPreview()
