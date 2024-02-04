@@ -85,6 +85,6 @@ fun MeditationApp() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun AdhdPreview() {
     MeditationApp()
 }

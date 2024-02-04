@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.liva.meditationapp.login.LoginScreen
 import com.liva.meditationapp.login.LoginViewModel
+import com.liva.meditationapp.stressmeditation.MeditationApp
 import com.liva.meditationapp.ui.theme.MeditationAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen(LoginViewModel())
+                    MeditationApp()
                 }
             }
         }

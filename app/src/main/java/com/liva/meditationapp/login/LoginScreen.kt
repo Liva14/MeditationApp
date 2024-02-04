@@ -1,7 +1,5 @@
 package com.liva.meditationapp.login
 
-import android.content.Intent
-import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -24,21 +21,15 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.liva.meditationapp.MainActivity
 import com.liva.meditationapp.R
-import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(viewModel: LoginViewModel) {
@@ -56,7 +47,6 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel) {
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
     val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
-    val coroutineScope = rememberCoroutineScope()
 
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         HeaderImage(modifier.align(Alignment.CenterHorizontally))
@@ -67,20 +57,15 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel) {
         Spacer(modifier = modifier.padding(8.dp))
         ForgotPassword(modifier.align(Alignment.End))
         Spacer(modifier = modifier.padding(16.dp))
-        LoginButton(loginEnable) {}
+        LoginButton(loginEnable)
     }
 }
 
 
 @Composable
-fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
-    val context = LocalContext.current
+fun LoginButton(loginEnable: Boolean) {
     Button(
-        onClick = {
-            onLoginSelected()
-            // Navigate to the main activity
-            context.startActivity(Intent(context, MainActivity::class.java))
-        },
+        onClick = {  },
         modifier = Modifier
             .fillMaxWidth()
             .height(38.dp),
