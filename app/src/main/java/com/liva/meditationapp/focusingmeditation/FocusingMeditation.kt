@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.liva.meditationapp.R
 import com.liva.meditationapp.scaffold.MyBottomNavigation
 import com.liva.meditationapp.scaffold.MyNavigationDrawer
@@ -118,7 +119,7 @@ fun BackgroundImage() {
 }
 @Preview
 @Composable
-fun FocusingApp() {
+fun FocusingApp(navController: NavController) {
     val scope = rememberCoroutineScope()
     var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     ModalNavigationDrawer(
@@ -137,7 +138,7 @@ fun FocusingApp() {
                 }
             },
             bottomBar = {
-                MyBottomNavigation()
+                MyBottomNavigation(navController)
             }
         ) { innerPadding ->
             Column(

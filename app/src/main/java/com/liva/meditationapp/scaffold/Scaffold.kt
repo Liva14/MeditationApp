@@ -35,6 +35,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.liva.meditationapp.navigation.AppScreens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,9 +55,8 @@ fun MyTopAppBar(onClickDrawer:() -> Unit) {
         }
     )
 }
-@Preview
 @Composable
-fun MyBottomNavigation() {
+fun MyBottomNavigation(navController: NavController) {
     var index: Int by rememberSaveable { mutableIntStateOf(0) }
     NavigationBar(
         contentColor = Color.White,
@@ -63,7 +64,7 @@ fun MyBottomNavigation() {
     ) {
         NavigationBarItem(
             selected = index == 0,
-            onClick = { index = 0 },
+            onClick = { navController.navigate(route = AppScreens.MainScreen.route) },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
@@ -75,7 +76,7 @@ fun MyBottomNavigation() {
         )
         NavigationBarItem(
             selected = index == 2,
-            onClick = { index = 2 },
+            onClick = { navController.navigate(route = AppScreens.SettingsScreen.route) },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Settings,

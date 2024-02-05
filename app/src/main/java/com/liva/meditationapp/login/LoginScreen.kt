@@ -29,23 +29,41 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.liva.meditationapp.R
+import com.liva.meditationapp.navigation.AppScreens
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(viewModel: LoginViewModel, navController: NavController, loginEnable: Boolean) {
+    val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
     Box(
         Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
         Login(Modifier.align(Alignment.Center), viewModel)
+        Button(
+            onClick = { navController.navigate(route = AppScreens.MainScreen.route) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(38.dp)
+                .align(Alignment.BottomCenter),
+            colors = ButtonDefaults.buttonColors(
+                disabledContainerColor = Color(0xFF649AF8),
+                containerColor = Color(0xFF025EFF),
+                contentColor = Color.White,
+                disabledContentColor = Color.White
+            ),
+            enabled = loginEnable
+        ) {
+            Text(text = "Iniciar sesión")
+        }
     }
 }
 @Composable
 fun Login(modifier: Modifier, viewModel: LoginViewModel) {
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
-    val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
 
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         HeaderImage(modifier.align(Alignment.CenterHorizontally))
@@ -56,27 +74,7 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel) {
         Spacer(modifier = modifier.padding(8.dp))
         ForgotPassword(modifier.align(Alignment.End))
         Spacer(modifier = modifier.padding(16.dp))
-        LoginButton(loginEnable)
-    }
-}
 
-
-@Composable
-fun LoginButton(loginEnable: Boolean) {
-    Button(
-        onClick = {  },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(38.dp),
-        colors = ButtonDefaults.buttonColors(
-            disabledContainerColor = Color(0xFF649AF8),
-            containerColor = Color(0xFF025EFF),
-            contentColor = Color.White,
-            disabledContentColor = Color.White
-        ),
-        enabled = loginEnable
-    ) {
-        Text(text = "Iniciar sesión")
     }
 }
 

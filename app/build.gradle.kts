@@ -62,7 +62,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.0")
     implementation("androidx.drawerlayout:drawerlayout:1.1.1")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha09")
+    implementation("androidx.navigation:navigation-compose:2.5.0-alpha01")
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-alpha09")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.0-alpha09")
     implementation ("com.google.accompanist:accompanist-navigation-material:0.24.2-alpha")
