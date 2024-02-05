@@ -10,10 +10,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,7 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.liva.meditationapp.R
 import com.liva.meditationapp.scaffold.MyBottomNavigation
+import com.liva.meditationapp.scaffold.MyNavigationDrawer
 import com.liva.meditationapp.scaffold.MyTopAppBar
+import kotlinx.coroutines.launch
 
 @Composable
 fun MeditationType(text: String) {
@@ -41,9 +48,11 @@ fun MeditationType(text: String) {
 fun LoremIpsumText() {
     val uriHandler = LocalUriHandler.current
     val link = "https://www.choosingtherapy.com/meditation-for-adhd/"
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .padding(horizontal = 10.dp)) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 10.dp)
+    ) {
         Column {
             Text(
                 text = "\nThere are a variety of meditation techniques that an individual with ADHD can try. Different styles may work better for one person, but not another. It is worth trying out different approaches to find which one(s) work best for you.",
@@ -92,7 +101,9 @@ fun LoremIpsumText() {
             Text(
                 text = "More info here",
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.clickable { uriHandler.openUri(link) }.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .clickable { uriHandler.openUri(link) }
+                    .align(Alignment.CenterHorizontally)
             )
         }
     }
@@ -112,25 +123,39 @@ fun BackgroundImage() {
 
 @Composable
 fun AdhdApp() {
-    Scaffold(
-        topBar = {
-            MyTopAppBar()
+    val scope = rememberCoroutineScope()
+    var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet {
+                MyNavigationDrawer{ scope.launch { drawerState.close() } }
+            }
         },
-        bottomBar = {
-            MyBottomNavigation()
-        }
-    ) { innerPadding ->
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-        ) {
-            MeditationType("ADHD Meditation")
-            BackgroundImage()
-            LoremIpsumText()
+        gesturesEnabled = true
+    ) {
+        Scaffold(
+            topBar = {
+                MyTopAppBar() {
+                    scope.launch { drawerState.open() }
+                }
+            },
+            bottomBar = {
+                MyBottomNavigation()
+            }
+        ) { innerPadding ->
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                MeditationType("ADHD Meditation")
+                BackgroundImage()
+                LoremIpsumText()
+            }
         }
     }
 }

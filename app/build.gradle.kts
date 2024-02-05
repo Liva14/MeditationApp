@@ -65,6 +65,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha09")
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-alpha09")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.0-alpha09")
+    implementation ("com.google.accompanist:accompanist-navigation-material:0.24.2-alpha")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

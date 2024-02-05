@@ -10,10 +10,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
@@ -24,7 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.liva.meditationapp.R
 import com.liva.meditationapp.scaffold.MyBottomNavigation
+import com.liva.meditationapp.scaffold.MyNavigationDrawer
 import com.liva.meditationapp.scaffold.MyTopAppBar
+import kotlinx.coroutines.launch
 
 @Composable
 fun MeditationType(text: String) {
@@ -39,10 +46,13 @@ fun MeditationType(text: String) {
 @Composable
 fun LoremIpsumText() {
     val uriHandler = LocalUriHandler.current
-    val link = "https://www.piedmont.org/living-real-change/5-meditation-tips-for-stressful-situations"
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .padding(horizontal = 10.dp)) {
+    val link =
+        "https://www.piedmont.org/living-real-change/5-meditation-tips-for-stressful-situations"
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 10.dp)
+    ) {
         Column {
             Text(
                 text = "\nKeep your cool in stressful situations by practicing meditation techniques wherever you are. Dennis Buttimer, M.Ed, CEAP, RYT, CHC, a life and wellness coach at Cancer Wellness, shares how you can enjoy the benefits of meditation on the go.",
@@ -113,25 +123,39 @@ fun BackgroundImage() {
 
 @Composable
 fun StressApp() {
-    Scaffold(
-        topBar = {
-            MyTopAppBar()
+    val scope = rememberCoroutineScope()
+    var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet {
+                MyNavigationDrawer{ scope.launch { drawerState.close() } }
+            }
         },
-        bottomBar = {
-            MyBottomNavigation()
-        }
-    ) { innerPadding ->
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-        ) {
-            MeditationType("Stress Meditation")
-            BackgroundImage()
-            LoremIpsumText()
+        gesturesEnabled = true
+    ) {
+        Scaffold(
+            topBar = {
+                MyTopAppBar() {
+                    scope.launch { drawerState.open() }
+                }
+            },
+            bottomBar = {
+                MyBottomNavigation()
+            }
+        ) { innerPadding ->
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                MeditationType("Stress Meditation")
+                BackgroundImage()
+                LoremIpsumText()
+            }
         }
     }
 }
