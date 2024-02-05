@@ -41,7 +41,6 @@ fun LoginScreen(viewModel: LoginViewModel) {
         Login(Modifier.align(Alignment.Center), viewModel)
     }
 }
-
 @Composable
 fun Login(modifier: Modifier, viewModel: LoginViewModel) {
     val email: String by viewModel.email.observeAsState(initial = "")
@@ -143,4 +142,3 @@ fun HeaderImage(modifier: Modifier) {
         contentDescription = "Logo"
     )
 }
-
